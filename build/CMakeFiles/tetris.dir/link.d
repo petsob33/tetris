@@ -2,6 +2,11 @@ tetris: \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crt1.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crti.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan_preinit.o \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan.so \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan.so \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan.so \
+  /usr/lib64/libasan.so.8.0.0 \
   CMakeFiles/tetris.dir/main.c.o \
   CMakeFiles/tetris.dir/grafic.c.o \
   CMakeFiles/tetris.dir/controller.c.o \
@@ -34,6 +39,8 @@ tetris: \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crtn.o \
+  /usr/lib64/libstdc++.so.6 \
+  /lib64/libgcc_s.so.1 \
   /usr/lib64/libharfbuzz.so.0 \
   /usr/lib64/libfreetype.so.6 \
   /lib64/ld-linux-x86-64.so.2 \
@@ -51,6 +58,16 @@ tetris: \
 /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crti.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan_preinit.o:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan.so:
+
+/usr/lib64/libasan.so.8.0.0:
 
 CMakeFiles/tetris.dir/main.c.o:
 
@@ -115,6 +132,10 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crtn.o:
+
+/usr/lib64/libstdc++.so.6:
+
+/lib64/libgcc_s.so.1:
 
 /usr/lib64/libharfbuzz.so.0:
 

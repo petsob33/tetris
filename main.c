@@ -8,11 +8,12 @@
 
 int main()
 {
+    
     srand(time(NULL));
+    // INITIALIZATION
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
     TTF_Font *font = TTF_OpenFont("font.ttf", 24);
-
     SDL_Window *window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_Event event;
@@ -34,10 +35,13 @@ int main()
     int iteration = 0, score = 0, speed = 30;
 
     GameState state = MENU;
-    int menuOption = 0;
+    int menuOption = 0; // 0 -2
+
+    // INPUT
 
     while (state != QUIT)
     {
+        // event handling
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
@@ -112,36 +116,38 @@ int main()
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderClear(renderer);
-
         // UI
 
-        SDL_Color black = {0, 0, 0, 255};
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        SDL_Color white = {255, 255, 255, 255};
         SDL_Color red = {255, 0, 0, 255};
+        int width, height;
+        SDL_GetWindowSize(window, &width, &height);
 
         switch (state)
         {
         case MENU:
 
-            drawText(renderer, 300, 150, "TETRIS", font, black);
-            drawText(renderer, 300, 300, "Start Game", font, (menuOption == 0) ? red : black);
-            drawText(renderer, 300, 350, "High Scores", font, (menuOption == 1) ? red : black);
-            drawText(renderer, 300, 400, "Exit", font, (menuOption == 2) ? red : black);
-            drawText(renderer, 200, 600, "W - UP S - DOWN", font, black);
+            drawText(renderer, width / 2 - 50, 150, "TETRIS", font, white);
+            drawText(renderer, width / 2 - 50, 300, "Start Game", font, (menuOption == 0) ? red : white);
+            drawText(renderer, width / 2 - 50, 350, "High Scores", font, (menuOption == 1) ? red : white);
+            drawText(renderer, width / 2 - 50, 400, "Exit", font, (menuOption == 2) ? red : white);
+            drawText(renderer, width / 2 - 50, 600, "W - UP S - DOWN", font, white);
 
             break;
 
         case HIGHSCORES:
 
-            drawText(renderer, 280, 100, "TOP 5 SCORE", font, black);
+            drawText(renderer, width / 2 - 100, 100, "TOP 5 SCORE", font, white);
             char buffer[50];
             for (int i = 0; i < 5; i++)
             {
                 sprintf(buffer, "%d. %d", i + 1, highScore[i]);
-                drawText(renderer, 300, 200 + (i * 40), buffer, font, black);
+                drawText(renderer, width / 2 - 100, 200 + (i * 40), buffer, font, white);
             }
-            drawText(renderer, 200, 500, "Pess Enter", font, black);
+            drawText(renderer, width / 2 - 10, 500, "Press Enter", font, white);
             break;
 
         case GAME:
@@ -156,6 +162,7 @@ int main()
             }
             else
             {
+                
                 switch (controlLine(gameArr))
                 {
                 case 1:
@@ -172,15 +179,15 @@ int main()
                     break;
                 }
                 if (score < 500)
-                    speed = 30; 
+                    speed = 30;
                 else if (score < 1000)
                     speed = 25;
                 else if (score < 2000)
-                    speed = 21; 
+                    speed = 21;
                 else if (score < 4000)
-                    speed = 17; 
+                    speed = 17;
                 else if (score < 8000)
-                    speed = 13; 
+                    speed = 13;
                 else
                     speed = 10;
 

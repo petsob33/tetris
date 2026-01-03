@@ -589,10 +589,13 @@ tetris: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan.so \
+  /usr/lib/gcc/x86_64-redhat-linux/15/libasan_preinit.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
   /usr/lib64/libSDL2-2.0.so.0.3200.56 \
   /usr/lib64/libSDL2main.a \
+  /usr/lib64/libasan.so.8.0.0 \
   /usr/lib64/libbrotlicommon.so.1 \
   /usr/lib64/libbrotlidec.so.1 \
   /usr/lib64/libbz2.so.1 \
@@ -603,6 +606,7 @@ tetris: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib64/libharfbuzz.so.0 \
   /usr/lib64/libpcre2-8.so.0 \
   /usr/lib64/libpng16.so.16 \
+  /usr/lib64/libstdc++.so.6 \
   /usr/lib64/libz.so.1 \
   CMakeFiles/tetris.dir/controller.c.o \
   CMakeFiles/tetris.dir/grafic.c.o \
@@ -614,6 +618,8 @@ CMakeFiles/tetris.dir/main.c.o:
 CMakeFiles/tetris.dir/grafic.c.o:
 
 /usr/lib64/libz.so.1:
+
+/usr/lib64/libstdc++.so.6:
 
 /usr/lib64/libpng16.so.16:
 
@@ -632,6 +638,8 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/lib64/libSDL2-2.0.so.0.3200.56:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
@@ -752,6 +760,8 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/include/tsxldtrkintrin.h:
 
 /usr/include/bits/fp-fast.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libasan_preinit.o:
 
 /usr/include/SDL2/SDL_audio.h:
 
@@ -1158,6 +1168,8 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/include/adxintrin.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/lzcntintrin.h:
+
+/usr/lib64/libasan.so.8.0.0:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/pconfigintrin.h:
 

@@ -54,9 +54,8 @@ const int shapes[7][4][4] = {
         {7, 7, 7, 0},
         {0, 0, 0, 0},
         {0, 0, 0, 0}}};
-int spawnShape(int gameArr[20][10])
+int spawnShape(int gameArr[20][10], int actualShape)
 {
-    int randomShape = rand() % 7;
     int LeftSpawnX = rand() % 6;
     for (int y = 0; y < 4; y++)
     {
@@ -72,7 +71,7 @@ int spawnShape(int gameArr[20][10])
     {
         for (int x = 0; x < 4; x++)
         {
-            gameArr[0 + y][LeftSpawnX + x] = shapes[randomShape][y][x];
+            gameArr[0 + y][LeftSpawnX + x] = shapes[actualShape][y][x];
         }
     }
     return 0;
@@ -187,7 +186,6 @@ int playMove(int gameArr[20][10], int xMove, int yMove)
     }
     return 1;
 }
-
 void rotateShape(int gameArr[20][10])
 {
     int minX = 10, minY = 20;
@@ -214,31 +212,32 @@ void rotateShape(int gameArr[20][10])
         return;
     int width = maxX - minX + 1;
     int height = maxY - minY + 1;
+    if (width == 2 && height == 2)
+        return;
     int size = 3;
     if (width == 4 || height == 4)
-    {
         size = 4;
-    }
-    else if (width == 2 && height == 2)
-    {
-        return;
-    }
+
     int temp[4][4] = {0};
     int rotated[4][4] = {0};
+    int backupShape[4][4] = {0};
+
     for (int y = 0; y < size; y++)
     {
         for (int x = 0; x < size; x++)
         {
-            if (minY + y < 20 && minX + x < 10)
+            if (minY + y <= maxY && minX + x <= maxX)
             {
                 if (gameArr[minY + y][minX + x] > 0 && gameArr[minY + y][minX + x] < 10)
                 {
                     temp[y][x] = gameArr[minY + y][minX + x];
+                    backupShape[y][x] = temp[y][x];
                     gameArr[minY + y][minX + x] = 0;
                 }
             }
         }
     }
+
     for (int y = 0; y < size; y++)
     {
         for (int x = 0; x < size; x++)
@@ -246,28 +245,50 @@ void rotateShape(int gameArr[20][10])
             rotated[x][size - 1 - y] = temp[y][x];
         }
     }
-    int collision = 0;
-    for (int y = 0; y < size; y++)
-    {
-        for (int x = 0; x < size; x++)
-        {
-            if (rotated[y][x] != 0)
-            {
-                int targetX = minX + x;
-                int targetY = minY + y;
+    int offsetX = (width - height) / 2;
+    int offsetY = (height - width) / 2;
+    int targetX = minX + offsetX;
+    int targetY = minY + offsetY;
 
-                if (targetX < 0 || targetX >= 10 || targetY >= 20)
+    int kicksX[] = {0, -1, 1, -2, 2};
+    int finalX = -100, finalY = -100;
+    int success = 0;
+
+    for (int k = 0; k < 5; k++)
+    {
+        int testX = targetX + kicksX[k];
+        int testY = targetY;
+        int collision = 0;
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if (rotated[y][x] != 0)
                 {
-                    collision = 1;
-                }
-                else if (gameArr[targetY][targetX] != 0)
-                {
-                    collision = 1;
+                    int fieldX = testX + x;
+                    int fieldY = testY + y;
+                    if (fieldX < 0 || fieldX >= 10 || fieldY >= 20 || fieldY < 0)
+                    {
+                        collision = 1;
+                    }
+                    else if (gameArr[fieldY][fieldX] > 10)
+                    {
+                        collision = 1;
+                    }
                 }
             }
         }
+
+        if (collision == 0)
+        {
+            finalX = testX;
+            finalY = testY;
+            success = 1;
+            break;
+        }
     }
-    if (collision == 0)
+
+    if (success)
     {
         for (int y = 0; y < size; y++)
         {
@@ -275,8 +296,7 @@ void rotateShape(int gameArr[20][10])
             {
                 if (rotated[y][x] != 0)
                 {
-                    if (minY + y < 20 && minX + x < 10)
-                        gameArr[minY + y][minX + x] = rotated[y][x];
+                    gameArr[finalY + y][finalX + x] = rotated[y][x];
                 }
             }
         }
@@ -287,16 +307,14 @@ void rotateShape(int gameArr[20][10])
         {
             for (int x = 0; x < size; x++)
             {
-                if (temp[y][x] != 0)
+                if (backupShape[y][x] != 0)
                 {
-                    if (minY + y < 20 && minX + x < 10)
-                        gameArr[minY + y][minX + x] = temp[y][x];
+                    gameArr[minY + y][minX + x] = backupShape[y][x];
                 }
             }
         }
     }
 }
-
 int controlLine(int gameArr[20][10])
 {
     int doneLines = 0;
@@ -328,4 +346,40 @@ int controlLine(int gameArr[20][10])
         }
     }
     return doneLines;
+}
+
+void resetGame(int gameArr[20][10], int *score, int *iteration, int *actualShape, int *nextShape)
+{
+    for (int y = 0; y < 20; y++)
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            gameArr[y][x] = 0;
+        }
+    }
+    *score = 0;
+    *iteration = 0;
+    *actualShape = rand() % 7;
+    *nextShape = rand() % 7;
+}
+
+void saveScore(int score, int highScore[5])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (score > highScore[i])
+        {
+            int tmp = highScore[i];
+            highScore[i] = score;
+            score = tmp;
+        }
+    }
+
+    FILE *file = fopen("scores.txt", "w");
+    if (file)
+    {
+        for (int i = 0; i < 5; i++)
+            fprintf(file, "%d\n", highScore[i]);
+        fclose(file);
+    }
 }

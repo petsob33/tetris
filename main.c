@@ -4,96 +4,207 @@
 #include "grafic.h"
 #include "controller.h"
 #include <time.h>
+#include <SDL2/SDL_ttf.h>
+
 int main()
 {
     srand(time(NULL));
     SDL_Init(SDL_INIT_VIDEO);
-    int gameArr[20][10];
-    for (int y = 0; y < 20; y++)
+    TTF_Init();
+    TTF_Font *font = TTF_OpenFont("font.ttf", 24);
+
+    SDL_Window *window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Event event;
+
+    int highScore[5] = {0};
+    FILE *file = fopen("scores.txt", "r");
+    if (file)
     {
-        for (int x = 0; x < 10; x++)
+        for (int i = 0; i < 5; i++)
         {
-            gameArr[y][x] = 0;
+            fscanf(file, "%d", &highScore[i]);
         }
-        printf("\n");
+        fclose(file);
     }
 
-    SDL_Window *window = SDL_CreateWindow("Snow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    int gameArr[20][10] = {0};
+    int actualShape = rand() % 7;
+    int nextShape = rand() % 7;
+    int iteration = 0, score = 0, speed = 30;
 
-    SDL_Event event;
-    int running = 1;
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
-    int test = 1;
-    int iteration = 0;
-    int score = 0;
-    while (running == 1)
+    GameState state = MENU;
+    int menuOption = 0;
+
+    while (state != QUIT)
     {
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
             {
-                running = 0;
+                state = QUIT;
+                saveScore(score, highScore);
             }
             if (event.type == SDL_KEYDOWN)
             {
-                switch (event.key.keysym.sym)
+                if (state == MENU)
                 {
-                case SDLK_a:
-                    playMove(gameArr, -1, 0);
-                    break;
+                    if (event.key.keysym.sym == SDLK_w)
+                    {
+                        menuOption--;
+                        if (menuOption < 0)
+                            menuOption = 2;
+                    }
+                    if (event.key.keysym.sym == SDLK_s)
+                    {
+                        menuOption++;
+                        if (menuOption > 2)
+                            menuOption = 0;
+                    }
+                    if (event.key.keysym.sym == SDLK_RETURN)
+                    {
+                        if (menuOption == 0)
+                        {
+                            resetGame(gameArr, &score, &iteration, &actualShape, &nextShape);
+                            state = GAME;
+                        }
+                        if (menuOption == 1)
+                            state = HIGHSCORES;
+                        if (menuOption == 2)
+                            state = QUIT;
+                    }
+                }
+                else if (state == HIGHSCORES)
+                {
+                    if (event.key.keysym.sym == SDLK_ESCAPE || event.key.keysym.sym == SDLK_RETURN)
+                    {
+                        state = MENU;
+                    }
+                }
 
-                case SDLK_d:
-                    playMove(gameArr, 1, 0);
-                    break;
-
-                case SDLK_s:
-                    moveDown(gameArr);
-                    iteration = 0;
-                    break;
-
-                case SDLK_w:
-
-                    rotateShape(gameArr);
-                    break;
+                else if (state == GAME)
+                {
+                    switch (event.key.keysym.sym)
+                    {
+                    case SDLK_a:
+                        playMove(gameArr, -1, 0);
+                        break;
+                    case SDLK_d:
+                        playMove(gameArr, 1, 0);
+                        break;
+                    case SDLK_s:
+                        moveDown(gameArr);
+                        iteration = 0;
+                        break;
+                    case SDLK_w:
+                        rotateShape(gameArr);
+                        break;
+                    case SDLK_SPACE:
+                        while (shapeIsActive(gameArr))
+                            moveDown(gameArr);
+                        break;
+                    case SDLK_ESCAPE:
+                        saveScore(score, highScore);
+                        state = MENU;
+                        break;
+                    }
                 }
             }
         }
-        if (shapeIsActive(gameArr))
-        {
-            if (iteration >= 30)
-            {
-                moveDown(gameArr);
-
-                iteration = 0;
-            }
-        }
-        else
-        {
-            score += controlLine(gameArr);
-            
-            if (spawnShape(gameArr) == 1)
-            {
-                printf("Game Over! Score: %d\n", score);
-                running = 0;
-            }
-            
-            
-
-            iteration = 0;
-        }   
-
-        iteration++;
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
 
-        renderArr(gameArr, renderer, window);
+        // UI
+
+        SDL_Color black = {0, 0, 0, 255};
+        SDL_Color red = {255, 0, 0, 255};
+
+        switch (state)
+        {
+        case MENU:
+
+            drawText(renderer, 300, 150, "TETRIS", font, black);
+            drawText(renderer, 300, 300, "Start Game", font, (menuOption == 0) ? red : black);
+            drawText(renderer, 300, 350, "High Scores", font, (menuOption == 1) ? red : black);
+            drawText(renderer, 300, 400, "Exit", font, (menuOption == 2) ? red : black);
+            drawText(renderer, 200, 600, "W - UP S - DOWN", font, black);
+
+            break;
+
+        case HIGHSCORES:
+
+            drawText(renderer, 280, 100, "TOP 5 SCORE", font, black);
+            char buffer[50];
+            for (int i = 0; i < 5; i++)
+            {
+                sprintf(buffer, "%d. %d", i + 1, highScore[i]);
+                drawText(renderer, 300, 200 + (i * 40), buffer, font, black);
+            }
+            drawText(renderer, 200, 500, "Pess Enter", font, black);
+            break;
+
+        case GAME:
+
+            if (shapeIsActive(gameArr))
+            {
+                if (iteration >= speed)
+                {
+                    moveDown(gameArr);
+                    iteration = 0;
+                }
+            }
+            else
+            {
+                switch (controlLine(gameArr))
+                {
+                case 1:
+                    score += 40;
+                    break;
+                case 2:
+                    score += 100;
+                    break;
+                case 3:
+                    score += 300;
+                    break;
+                case 4:
+                    score += 1200;
+                    break;
+                }
+                if (score < 500)
+                    speed = 30; 
+                else if (score < 1000)
+                    speed = 25;
+                else if (score < 2000)
+                    speed = 21; 
+                else if (score < 4000)
+                    speed = 17; 
+                else if (score < 8000)
+                    speed = 13; 
+                else
+                    speed = 10;
+
+                if (spawnShape(gameArr, nextShape) == 1)
+                {
+                    saveScore(score, highScore);
+                    state = MENU;
+                }
+                actualShape = nextShape;
+                nextShape = rand() % 7;
+                iteration = 0;
+            }
+            iteration++;
+            renderArr(gameArr, renderer, window, nextShape, font, score, highScore);
+
+            break;
+        }
+
         SDL_RenderPresent(renderer);
         SDL_Delay(16);
     }
 
+    TTF_CloseFont(font);
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

@@ -1,1 +1,1 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/tetris.dir/link.d CMakeFiles/tetris.dir/main.c.o CMakeFiles/tetris.dir/grafic.c.o CMakeFiles/tetris.dir/controller.c.o -o tetris  /usr/lib64/libSDL2main.a /usr/lib64/libSDL2-2.0.so.0.3200.56 -lm
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/tetris.dir/link.d CMakeFiles/tetris.dir/main.c.o CMakeFiles/tetris.dir/grafic.c.o CMakeFiles/tetris.dir/controller.c.o -o tetris  /usr/lib64/libSDL2main.a /usr/lib64/libSDL2-2.0.so.0.3200.56 -lSDL2_ttf -lSDL2 -lm

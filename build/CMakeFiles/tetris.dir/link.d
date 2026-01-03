@@ -7,6 +7,8 @@ tetris: \
   CMakeFiles/tetris.dir/controller.c.o \
   /usr/lib64/libSDL2main.a \
   /usr/lib64/libSDL2-2.0.so.0.3200.56 \
+  /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libSDL2_ttf.so \
+  /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libSDL2.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libm.so \
@@ -32,7 +34,17 @@ tetris: \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crtn.o \
-  /lib64/ld-linux-x86-64.so.2
+  /usr/lib64/libharfbuzz.so.0 \
+  /usr/lib64/libfreetype.so.6 \
+  /lib64/ld-linux-x86-64.so.2 \
+  /usr/lib64/libglib-2.0.so.0 \
+  /usr/lib64/libgraphite2.so.3 \
+  /usr/lib64/libz.so.1 \
+  /usr/lib64/libbz2.so.1 \
+  /usr/lib64/libpng16.so.16 \
+  /usr/lib64/libbrotlidec.so.1 \
+  /usr/lib64/libpcre2-8.so.0 \
+  /usr/lib64/libbrotlicommon.so.1
 
 /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crt1.o:
 
@@ -49,6 +61,10 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/lib64/libSDL2main.a:
 
 /usr/lib64/libSDL2-2.0.so.0.3200.56:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libSDL2_ttf.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libSDL2.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libm.so:
 
@@ -100,4 +116,24 @@ CMakeFiles/tetris.dir/controller.c.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crtn.o:
 
+/usr/lib64/libharfbuzz.so.0:
+
+/usr/lib64/libfreetype.so.6:
+
 /lib64/ld-linux-x86-64.so.2:
+
+/usr/lib64/libglib-2.0.so.0:
+
+/usr/lib64/libgraphite2.so.3:
+
+/usr/lib64/libz.so.1:
+
+/usr/lib64/libbz2.so.1:
+
+/usr/lib64/libpng16.so.16:
+
+/usr/lib64/libbrotlidec.so.1:
+
+/usr/lib64/libpcre2-8.so.0:
+
+/usr/lib64/libbrotlicommon.so.1:

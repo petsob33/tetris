@@ -108,6 +108,7 @@ CMakeFiles/tetris.dir/grafic.c.o: /home/petrsobol/prace/UPR/tetris/grafic.c \
   /usr/include/SDL2/SDL_thread.h \
   /usr/include/SDL2/SDL_timer.h \
   /usr/include/SDL2/SDL_touch.h \
+  /usr/include/SDL2/SDL_ttf.h \
   /usr/include/SDL2/SDL_version.h \
   /usr/include/SDL2/SDL_video.h \
   /usr/include/SDL2/begin_code.h \
@@ -364,6 +365,7 @@ CMakeFiles/tetris.dir/main.c.o: /home/petrsobol/prace/UPR/tetris/main.c \
   /usr/include/SDL2/SDL_thread.h \
   /usr/include/SDL2/SDL_timer.h \
   /usr/include/SDL2/SDL_touch.h \
+  /usr/include/SDL2/SDL_ttf.h \
   /usr/include/SDL2/SDL_version.h \
   /usr/include/SDL2/SDL_video.h \
   /usr/include/SDL2/begin_code.h \
@@ -581,6 +583,8 @@ tetris: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib64/crt1.o \
   /usr/lib64/crti.o \
   /usr/lib64/crtn.o \
+  /usr/lib64/libSDL2.so \
+  /usr/lib64/libSDL2_ttf.so \
   /usr/lib64/libc.so \
   /usr/lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
@@ -589,7 +593,17 @@ tetris: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
   /usr/lib64/libSDL2-2.0.so.0.3200.56 \
   /usr/lib64/libSDL2main.a \
+  /usr/lib64/libbrotlicommon.so.1 \
+  /usr/lib64/libbrotlidec.so.1 \
+  /usr/lib64/libbz2.so.1 \
   /usr/lib64/libc_nonshared.a \
+  /usr/lib64/libfreetype.so.6 \
+  /usr/lib64/libglib-2.0.so.0 \
+  /usr/lib64/libgraphite2.so.3 \
+  /usr/lib64/libharfbuzz.so.0 \
+  /usr/lib64/libpcre2-8.so.0 \
+  /usr/lib64/libpng16.so.16 \
+  /usr/lib64/libz.so.1 \
   CMakeFiles/tetris.dir/controller.c.o \
   CMakeFiles/tetris.dir/grafic.c.o \
   CMakeFiles/tetris.dir/main.c.o
@@ -599,7 +613,21 @@ CMakeFiles/tetris.dir/main.c.o:
 
 CMakeFiles/tetris.dir/grafic.c.o:
 
+/usr/lib64/libz.so.1:
+
+/usr/lib64/libpng16.so.16:
+
+/usr/lib64/libpcre2-8.so.0:
+
+/usr/lib64/libharfbuzz.so.0:
+
+/usr/lib64/libgraphite2.so.3:
+
+/usr/lib64/libglib-2.0.so.0:
+
 /usr/lib64/libc_nonshared.a:
+
+/usr/lib64/libbz2.so.1:
 
 /usr/lib64/libSDL2-2.0.so.0.3200.56:
 
@@ -608,6 +636,10 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
 /usr/lib64/libm.so:
+
+/usr/lib64/libSDL2_ttf.so:
+
+/usr/lib64/libSDL2.so:
 
 /usr/lib64/crtn.o:
 
@@ -620,10 +652,6 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/include/bits/types/struct_tm.h:
 
 /usr/include/bits/time.h:
-
-/usr/include/bits/types/locale_t.h:
-
-/usr/include/SDL2/SDL_touch.h:
 
 /usr/include/bits/types/__locale_t.h:
 
@@ -638,6 +666,12 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/include/bits/types/FILE.h:
 
 /usr/include/SDL2/close_code.h:
+
+/usr/include/SDL2/SDL_touch.h:
+
+/usr/include/bits/types/locale_t.h:
+
+/usr/lib64/libfreetype.so.6:
 
 /usr/include/SDL2/SDL_thread.h:
 
@@ -656,6 +690,10 @@ CMakeFiles/tetris.dir/grafic.c.o:
 /usr/include/SDL2/SDL_surface.h:
 
 /usr/include/SDL2/SDL_haptic.h:
+
+/home/petrsobol/prace/UPR/tetris/main.c:
+
+/usr/include/SDL2/SDL_pixels.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stdint.h:
 
@@ -889,9 +927,15 @@ CMakeFiles/tetris.dir/grafic.c.o:
 
 /usr/include/stdio.h:
 
+/usr/lib/gcc/x86_64-redhat-linux/15/include/avx512bitalgvlintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/include/avx512vnniintrin.h:
+
 /usr/include/sys/types.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/avx512ifmaintrin.h:
+
+/usr/lib64/libbrotlicommon.so.1:
 
 /usr/include/SDL2/SDL_hints.h:
 
@@ -920,6 +964,8 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/include/bits/wchar.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/vaesintrin.h:
+
+/usr/include/SDL2/SDL_ttf.h:
 
 /usr/include/inttypes.h:
 
@@ -973,6 +1019,8 @@ CMakeFiles/tetris.dir/controller.c.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/avx10_2-512bf16intrin.h:
 
+/usr/lib64/libbrotlidec.so.1:
+
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/avx10_2-512convertintrin.h:
@@ -1008,10 +1056,6 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/include/bits/libm-simd-decl-stubs.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/avx512bf16vlintrin.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/include/avx512bitalgvlintrin.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/include/avx512vnniintrin.h:
 
 /usr/include/sys/cdefs.h:
 
@@ -1152,7 +1196,3 @@ CMakeFiles/tetris.dir/controller.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/15/include/xsavecintrin.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/xsaveoptintrin.h:
-
-/usr/include/SDL2/SDL_pixels.h:
-
-/home/petrsobol/prace/UPR/tetris/main.c:

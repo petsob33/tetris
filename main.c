@@ -13,7 +13,7 @@ int main()
     // INITIALIZATION
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
-    TTF_Font *font = TTF_OpenFont("font.ttf", 24);
+    TTF_Font *font = TTF_OpenFont("../font.ttf", 24);
     SDL_Window *window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_Event event;

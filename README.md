@@ -19,7 +19,7 @@ sudo apt-get install build-essential cmake libsdl2-dev libsdl2-ttf-dev
 
 Sestavení / Build:
 ```
-mkdir -p build
+mkdir build
 cd build
 cmake ..
 make

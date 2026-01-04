@@ -1,0 +1,3 @@
+/home/petrsobol/prace/UPR/tetrisNew2/tetris/build/CMakeFiles/tetris.dir
+/home/petrsobol/prace/UPR/tetrisNew2/tetris/build/CMakeFiles/edit_cache.dir
+/home/petrsobol/prace/UPR/tetrisNew2/tetris/build/CMakeFiles/rebuild_cache.dir

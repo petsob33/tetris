@@ -8,15 +8,34 @@
 
 int main()
 {
-    
+
     srand(time(NULL));
     // INITIALIZATION
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
     TTF_Font *font = TTF_OpenFont("../font.ttf", 24);
+    if (!font)
+    {
+        TTF_Font *font = TTF_OpenFont("font.ttf", 24);
+        if (!font)
+        {
+            printf("Error font: %s\n", TTF_GetError());
+            return 1;
+        }
+    }
     SDL_Window *window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_Event event;
+    if (!renderer)
+    {
+        printf("Error: %s\n", SDL_GetError());
+        return 1;
+    }
+    if (!window)
+    {
+        printf("Error: %s\n", SDL_GetError());
+        return 1;
+    }
 
     int highScore[5] = {0};
     FILE *file = fopen("scores.txt", "r");
@@ -162,7 +181,7 @@ int main()
             }
             else
             {
-                
+
                 switch (controlLine(gameArr))
                 {
                 case 1:
@@ -204,12 +223,14 @@ int main()
             renderArr(gameArr, renderer, window, nextShape, font, score, highScore);
 
             break;
+        case QUIT:
+            break;
         }
 
         SDL_RenderPresent(renderer);
         SDL_Delay(16);
     }
-
+    
     TTF_CloseFont(font);
     TTF_Quit();
     SDL_DestroyRenderer(renderer);

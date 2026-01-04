@@ -41,10 +41,12 @@ Poznámky:
 
 - W / S — pohyb v menu
 - Enter — potvrdit volbu
-- Šipky vlevo / vpravo — posun tvaru
-- Šipka dolů — urychlení pádu
-- Space — otočení tvaru
-- Esc / zavřít okno — ukončit hru
+- D / vpravo — posun tvaru
+- A / vlevo — posun tvaru
+- S — urychlení pádu
+- Space — okamžitý pád
+- W - rotace tvaru
+- Esc / meny
 
 (V implementaci najdete logiku herních akcí v [`main.c`](main.c) a manipulaci s tvary v [`controller.c`](controller.c).)
 
@@ -64,13 +66,11 @@ Poznámky:
 
 ## Ukládání skóre
 
-Skóre jsou načítána a ukládána do souboru `scores.txt` v běhovém adresáři (viz [`saveScore`](controller.c) a načítání v [`main`](main.c)). Ve složce `build/` je příklad souboru [build/scores.txt](build/scores.txt).
-
+Skóre jsou načítána a ukládána do souboru `scores.txt`
 ---
 
 ## Úpravy a přispění
 
-- Kód je jednoduchý C projekt — pro rychlé úpravy stačí změnit zdrojové soubory a znovu spustit `cmake --build build`.
 - Pokud přidáte nový font, umístěte jej jako `font.ttf` do adresáře, odkud spouštíte spustitelný soubor.
 
 ---
